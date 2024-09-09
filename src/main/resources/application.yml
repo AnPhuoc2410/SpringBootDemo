@@ -1,5 +1,7 @@
 server:
   port: 8080
+  servlet:
+    context-path: /employ
   error:
     include-message: always
 
@@ -13,4 +15,4 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-    open-in-view: true    
+    open-in-view: true
