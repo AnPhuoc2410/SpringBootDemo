@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
+	boolean existsByUsername(String username); //JPA auto query SQL to check duplicated
+												//Username when field is username -- UserName when field is "userName" caution
 }

@@ -17,6 +17,9 @@ public class UserService {
 	public User createUser(UserDTO request) {
 		User user = new User();
 
+		if(userRepo.existsByUsername(request.getUsername())) {
+			throw new RuntimeException("User Duplicated");
+		}
 		user.setUsername(request.getUsername());
 		user.setEmail(request.getEmail());
 		user.setPassword(request.getPassword());
@@ -31,7 +34,7 @@ public class UserService {
 	}
 
 	public User findUserByID(Long userID) {
-		return userRepo.findById(userID).orElse(null);
+		return userRepo.findById(userID).orElseThrow(() -> new RuntimeException("User Not Found"));
 	}
 
 	public User updateUserByID(Long id, UserDTO request) {
