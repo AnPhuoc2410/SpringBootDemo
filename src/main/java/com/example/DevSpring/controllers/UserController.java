@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.DevSpring.dto.ApiResponse;
 import com.example.DevSpring.dto.UserDTO;
-import com.example.DevSpring.entity.User;
 import com.example.DevSpring.service.UserService;
 
 import jakarta.validation.Valid;
@@ -26,8 +25,8 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping
-	ApiResponse<User> createUser(@RequestBody @Valid UserDTO request) {
-		ApiResponse<User> apiResponse = new ApiResponse<User>();
+	ApiResponse<UserDTO> createUser(@RequestBody @Valid UserDTO request) {
+		ApiResponse<UserDTO> apiResponse = new ApiResponse<>();
 		
 		apiResponse.setResult(userService.createUser(request));
 		
@@ -35,17 +34,17 @@ public class UserController {
 	}
 
 	@GetMapping
-	List<User> getUsers() {
+	List<UserDTO> getUsers() {
 		return userService.getListUser();
 	}
 
 	@GetMapping("/{id}")
-	User findUser(@PathVariable Long id) {
+	UserDTO findUser(@PathVariable Long id) {
 		return userService.findUserByID(id);
 	}
 
 	@PutMapping("/{id}")
-	User updateUser(@PathVariable Long id, @RequestBody UserDTO request) {
+	UserDTO updateUser(@PathVariable Long id, @RequestBody UserDTO request) {
 		return userService.updateUserByID(id, request);
 	}
 
