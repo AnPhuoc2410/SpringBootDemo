@@ -1,40 +1,28 @@
 package com.example.DevSpring.dto;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public class UserDTO {
 
-	@NotEmpty
-	private String username;
-	@Size(min = 8, message = "Password must be at least 8 character")
-	private String password;
+	@Size(min = 3, message = "USERNAME_INVALID")
+	 String username;
+	@Size(min = 8, message = "USER_PASSWORD")
+	 String password;
 	@Email
-	private String email;
+	 String email;
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
 
 }
