@@ -12,34 +12,41 @@ public class GlobalExceptionHandle {
 
 	@ExceptionHandler(value = Exception.class)
 	ResponseEntity<ApiResponse> handlingRuntimeException(Exception exception) {
-		ApiResponse apiResponse = new ApiResponse();
-
+		ApiResponse apiResponse = new ApiResponse<>();
+	
 		apiResponse.setCode(9999);
 		apiResponse.setMessage(exception.getMessage());
 
 		return ResponseEntity.badRequest().body(apiResponse);
 	}
-
+	
 	@ExceptionHandler(value = AppException.class)
 	ResponseEntity<ApiResponse> handlingAppException(AppException exception) {
 		ErrorCode errorCode = exception.getErrorCode();
-		ApiResponse apiResponse = new ApiResponse();
-
+		ApiResponse apiResponse = new ApiResponse<>();
+	
 		apiResponse.setCode(errorCode.getCode());
 		apiResponse.setMessage(exception.getMessage());
 
+	
 		return ResponseEntity.badRequest().body(apiResponse);
 	}
-
+	
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)
 	ResponseEntity<ApiResponse> handlingValidation(MethodArgumentNotValidException exception) {
-		String enumKey = exception.getFieldError().getDefaultMessage();
-		ErrorCode errorCode = ErrorCode.valueOf(enumKey);
-		ApiResponse apiResponse = new ApiResponse();
+		ApiResponse apiResponse = new ApiResponse<>();
+		if (exception.getFieldError() != null) {
+			String enumKey = exception.getFieldError().getDefaultMessage();
+			ErrorCode errorCode = ErrorCode.valueOf(enumKey);
+	
+			apiResponse.setCode(errorCode.getCode());
+			apiResponse.setMessage(errorCode.getMessage());
 
-		apiResponse.setCode(errorCode.getCode());
-		apiResponse.setMessage(errorCode.getMessage());
-		
+		} else {
+			apiResponse.setCode(9999); // Default error code
+			apiResponse.setMessage("Validation error");
+		}
+	
 		return ResponseEntity.badRequest().body(apiResponse);
 	}
 
