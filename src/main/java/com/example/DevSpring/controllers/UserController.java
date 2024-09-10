@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.DevSpring.dto.ApiResponse;
 import com.example.DevSpring.dto.UserDTO;
 import com.example.DevSpring.entity.User;
 import com.example.DevSpring.service.UserService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
@@ -23,8 +26,12 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping
-	User createUser(@RequestBody UserDTO request) {
-		return userService.createUser(request);
+	ApiResponse<User> createUser(@RequestBody @Valid UserDTO request) {
+		ApiResponse<User> apiResponse = new ApiResponse<User>();
+		
+		apiResponse.setResult(userService.createUser(request));
+		
+		return apiResponse;
 	}
 
 	@GetMapping
@@ -33,26 +40,19 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	String findUser(@PathVariable Long id) {
-		User user = userService.findUserByID(id);
-		if(user != null) {
-			return "Found";
-		}else {
-			return "Not Found";
-		}
-	
+	User findUser(@PathVariable Long id) {
+		return userService.findUserByID(id);
 	}
-	
+
 	@PutMapping("/{id}")
-	User updateUser(@PathVariable Long id,@RequestBody UserDTO request) {
-		return userService.updateUserByID(id,request);
+	User updateUser(@PathVariable Long id, @RequestBody UserDTO request) {
+		return userService.updateUserByID(id, request);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	String deleteUser(@PathVariable Long id) {
 		userService.deleteUserByID(id);
 		return "Delete User Success";
 	}
-	
 
 }

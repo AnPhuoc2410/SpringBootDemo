@@ -1,9 +1,16 @@
 package com.example.DevSpring.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class UserDTO {
 
+	@NotEmpty
 	private String username;
+	@Size(min = 8, message = "Password must be at least 8 character")
 	private String password;
+	@Email
 	private String email;
 
 	public String getUsername() {

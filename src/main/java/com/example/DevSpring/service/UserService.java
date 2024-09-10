@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.DevSpring.dto.UserDTO;
 import com.example.DevSpring.entity.User;
+import com.example.DevSpring.exception.AppException;
+import com.example.DevSpring.exception.ErrorCode;
 import com.example.DevSpring.repository.UserRepository;
 
 @Service
@@ -18,7 +20,7 @@ public class UserService {
 		User user = new User();
 
 		if(userRepo.existsByUsername(request.getUsername())) {
-			throw new RuntimeException("User Duplicated");
+			throw new AppException(ErrorCode.USER_EXISTED);
 		}
 		user.setUsername(request.getUsername());
 		user.setEmail(request.getEmail());
@@ -26,7 +28,7 @@ public class UserService {
 
 		return userRepo.save(user);
 
-	}
+	} 
 
 	public List<User> getListUser() {
 
