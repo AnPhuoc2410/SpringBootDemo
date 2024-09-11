@@ -10,6 +10,8 @@ import com.example.DevSpring.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +31,8 @@ public class UserServiceImpl implements UserService {
             throw new AppException(ErrorCode.USER_EXISTED);
         }
         User user = userMapper.maptoUser(request);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);//strength to show how password encode complex
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         return userMapper.maptoUserDTO(userRepo.save(user));
 
