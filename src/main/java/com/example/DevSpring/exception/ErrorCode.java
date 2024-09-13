@@ -2,8 +2,10 @@ package com.example.DevSpring.exception;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 @Getter
+@FieldDefaults(makeFinal = true)
 public enum ErrorCode {
 	USER_EXISTED(1001,"User Existed"),
 	USERNAME_INVALID(1002,"Username must be at least 3 charater"),
