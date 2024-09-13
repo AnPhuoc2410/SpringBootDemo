@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 public enum ErrorCode {
 	USER_EXISTED(1001,"User Existed"),
 	USERNAME_INVALID(1002,"Username must be at least 3 charater"),
@@ -22,6 +21,7 @@ public enum ErrorCode {
 		this.code = code;
 		this.message = message;
 	}
-	
+
+
 	
 }
