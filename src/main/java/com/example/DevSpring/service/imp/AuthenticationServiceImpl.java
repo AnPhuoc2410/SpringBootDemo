@@ -92,7 +92,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         Date exprityTime = signedJWT.getJWTClaimsSet().getExpirationTime();
 
         var verified = signedJWT.verify(verifier);
-        return  IntrospectResponse.builder()
+        return IntrospectResponse.builder()
                 .valid(verified && exprityTime.after(new Date()))
                 .build();
     }
