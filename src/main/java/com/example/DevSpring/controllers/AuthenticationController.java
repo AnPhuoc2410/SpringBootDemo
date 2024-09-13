@@ -1,17 +1,21 @@
 package com.example.DevSpring.controllers;
 
 import com.example.DevSpring.dto.ApiResponse;
-import com.example.DevSpring.dto.LoginDTO;
+import com.example.DevSpring.dto.AuthenticationRequest;
+import com.example.DevSpring.dto.IntrospectRequest;
+import com.example.DevSpring.dto.response.AuthenticationResponse;
+import com.example.DevSpring.dto.response.IntrospectResponse;
 import com.example.DevSpring.service.AuthenticationService;
+import com.nimbusds.jose.JOSEException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/auth")
@@ -20,18 +24,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     AuthenticationService authService;
 
-    @PostMapping("/login")
-    public ResponseEntity<ApiResponse<LoginDTO>> authen(@RequestBody LoginDTO request) {
-        boolean result = authService.authenticate(request);
-
-        // Prepare the ApiResponse based on the authentication result
-        ApiResponse<LoginDTO> apiResponse = new ApiResponse<>();
-
-        if (result) {
-            apiResponse.setResult(request);
-            return ResponseEntity.ok(apiResponse);  // Return 200 OK with user data
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiResponse);  // Return 401 Unauthorized
-        }
+    @PostMapping("/token")
+    ApiResponse<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
+        var result = authService.authenticate(request);
+        return ApiResponse.<AuthenticationResponse>builder()
+                .result(result)
+                .build();
+    }
+    @PostMapping("/introspect")
+    ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest request) throws ParseException, JOSEException {
+        var result = authService.introspect(request);
+        return ApiResponse.<IntrospectResponse>builder()
+                .result(result)
+                .build();
     }
 }

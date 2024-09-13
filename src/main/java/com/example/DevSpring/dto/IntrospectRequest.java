@@ -8,7 +8,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class LoginDTO {
-    String username;
-    String password;
+public class IntrospectRequest {
+    String token;
 }
