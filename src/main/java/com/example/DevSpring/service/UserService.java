@@ -1,7 +1,6 @@
 package com.example.DevSpring.service;
 
-import com.example.DevSpring.dto.UserDTO;
-import com.example.DevSpring.entity.User;
+import com.example.DevSpring.dto.request.UserDTO;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.example.DevSpring.mapper;
 
-import com.example.DevSpring.dto.UserDTO;
+import com.example.DevSpring.dto.request.UserDTO;
 import com.example.DevSpring.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

@@ -1,7 +1,7 @@
 package com.example.DevSpring.controllers;
 
-import com.example.DevSpring.dto.ApiResponse;
-import com.example.DevSpring.dto.UserDTO;
+import com.example.DevSpring.dto.request.ApiResponse;
+import com.example.DevSpring.dto.request.UserDTO;
 import com.example.DevSpring.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -19,7 +19,7 @@ public class UserController {
 
 	 UserService userService;
 
-	@PostMapping
+	@PostMapping("/register")
 	ApiResponse<UserDTO> createUser(@RequestBody @Valid UserDTO request) {
 		ApiResponse<UserDTO> apiResponse = new ApiResponse<>();
 		

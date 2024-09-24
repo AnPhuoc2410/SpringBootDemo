@@ -1,8 +1,8 @@
 package com.example.DevSpring.controllers;
 
-import com.example.DevSpring.dto.ApiResponse;
-import com.example.DevSpring.dto.AuthenticationRequest;
-import com.example.DevSpring.dto.IntrospectRequest;
+import com.example.DevSpring.dto.request.ApiResponse;
+import com.example.DevSpring.dto.request.AuthenticationRequest;
+import com.example.DevSpring.dto.request.IntrospectRequest;
 import com.example.DevSpring.dto.response.AuthenticationResponse;
 import com.example.DevSpring.dto.response.IntrospectResponse;
 import com.example.DevSpring.service.AuthenticationService;
@@ -24,7 +24,7 @@ import java.text.ParseException;
 public class AuthenticationController {
     AuthenticationService authService;
 
-    @PostMapping("/token")
+    @PostMapping("/login")
     ApiResponse<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
         var result = authService.authenticate(request);
         return ApiResponse.<AuthenticationResponse>builder()

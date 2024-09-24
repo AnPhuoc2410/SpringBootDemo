@@ -1,6 +1,6 @@
 package com.example.DevSpring.service.imp;
 
-import com.example.DevSpring.dto.UserDTO;
+import com.example.DevSpring.dto.request.UserDTO;
 import com.example.DevSpring.entity.User;
 import com.example.DevSpring.exception.AppException;
 import com.example.DevSpring.exception.ErrorCode;

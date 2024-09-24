@@ -1,7 +1,7 @@
 package com.example.DevSpring.service.imp;
 
-import com.example.DevSpring.dto.AuthenticationRequest;
-import com.example.DevSpring.dto.IntrospectRequest;
+import com.example.DevSpring.dto.request.AuthenticationRequest;
+import com.example.DevSpring.dto.request.IntrospectRequest;
 import com.example.DevSpring.dto.response.AuthenticationResponse;
 import com.example.DevSpring.dto.response.IntrospectResponse;
 import com.example.DevSpring.exception.AppException;
